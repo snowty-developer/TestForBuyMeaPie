@@ -8,7 +8,6 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-import SVProgressHUD
 
 class ViewModel {
     var stories: [Story] = []
@@ -20,7 +19,6 @@ class ViewModel {
         dateFormatter.dateFormat = "dd.MM.yyyy"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
-//        SVProgressHUD.show()
         Alamofire.request("https://pivl.github.io/sample_api/covers/").responseJSON { response in
             if response.result.isSuccess {
                 let dataResult = JSON(response.value!)
@@ -35,7 +33,6 @@ class ViewModel {
                 DispatchQueue.main.async {
                     self.stories = storyArray
                     self.dateString = dateString
-//                    SVProgressHUD.dismiss()
                     completion()
                 }
             }
